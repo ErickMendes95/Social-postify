@@ -11,10 +11,15 @@ datasource db {
 }
 
 model User {
-  id       Int           @id @default(autoincrement())
-  email    String        @unique
-  password String
-  posts    Publication[]
+  id        Int           @id @default(autoincrement())
+  name      String
+  email     String        @unique
+  password  String
+  avatar    String
+  posts     Publication[]
+  createdAt DateTime      @default(now())
+
+  @@map("user")
 }
 
 model Publication {
@@ -27,4 +32,7 @@ model Publication {
   socialMedia   String
   User          User?    @relation(fields: [userId], references: [id])
   userId        Int?
+  createdAt     DateTime @default(now())
+
+  @@map("publication")
 }
