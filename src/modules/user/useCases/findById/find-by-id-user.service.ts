@@ -10,7 +10,7 @@ export class findByIdService {
     const user = await this.userRepository.findById(id);
     if (!user) throw new Error('User not found');
 
-    const {password, ...userWithoutPassword} = user
+    const { password, ...userWithoutPassword } = user;
 
     return userWithoutPassword;
   }

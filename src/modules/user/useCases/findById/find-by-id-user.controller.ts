@@ -1,4 +1,10 @@
-import { Controller, HttpStatus, HttpException, Get, Param } from '@nestjs/common';
+import {
+  Controller,
+  HttpStatus,
+  HttpException,
+  Get,
+  Param,
+} from '@nestjs/common';
 import { findByIdService } from './find-by-id-user.service';
 import { User } from '@prisma/client';
 
@@ -7,7 +13,7 @@ export class FindByIdController {
   constructor(private readonly findByIdService: findByIdService) {}
 
   @Get(':id')
-  async findAll(@Param('id') id:number): Promise<Omit<User, 'password'>> {
+  async findAll(@Param('id') id: number): Promise<Omit<User, 'password'>> {
     try {
       const user = await this.findByIdService.findById(id);
       return user;

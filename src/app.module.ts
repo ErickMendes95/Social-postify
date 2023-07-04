@@ -4,7 +4,6 @@ import { PublicationModule } from './modules/publication/publication.module';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 
-
 @Module({
   imports: [ConfigModule.forRoot(), UserModule, PublicationModule],
   controllers: [],

@@ -13,7 +13,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('signin')
-  async singin(@Body() body: SigninUserDTO){
+  async singin(@Body() body: SigninUserDTO) {
     try {
       const data = body;
       const token = await this.authService.singin(data);
