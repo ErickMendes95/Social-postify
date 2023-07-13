@@ -29,5 +29,6 @@ import { DeleteUserService } from './useCases/delete/delete-user.service';
     UpdateUserService,
     DeleteUserService,
   ],
+  exports: [UserRepository]
 })
 export class UserModule {}
