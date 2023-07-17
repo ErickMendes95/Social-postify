@@ -6,11 +6,19 @@ import { UpdatePublicationDto } from '../dto/update-publication.dto';
 
 @Injectable()
 export class PublicationRepository {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) {}
 
-  async create(data: CreatePublicationDto): Promise<void> {
+  async create(data: CreatePublicationDto, userId: number): Promise<void> {
     await this.prisma.publication.create({
-      data,
+      data: {
+        image: data.image,
+        text: data.text,
+        title: data.title,
+        dateToPublish: data.dateToPublish,
+        socialMedia: data.socialMedia,
+        published: data.published,
+        userId
+      },
     });
   }
 

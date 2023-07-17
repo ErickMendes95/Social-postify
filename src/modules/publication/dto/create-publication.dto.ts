@@ -1,5 +1,7 @@
+import { Transform, Type } from 'class-transformer';
 import {
   IsBoolean,
+  IsDate,
   IsDateString,
   IsNotEmpty,
   IsString,
@@ -19,11 +21,9 @@ export class CreatePublicationDto {
   @IsNotEmpty()
   text: string;
 
-  @IsDateString()
+  @Transform(({ value }) => new Date(value))
+  @IsDate({ message: 'A data precisa estar no formato yyyy-mm-dd' })
   @IsNotEmpty()
-  @Matches(/^\d{4}(-)(((0)[0-9])|((1)[0-2]))(-)([0-2][0-9]|(3)[0-1])$/i, {
-    message: 'A data precisa estar no formato yyyy-mm-dd',
-  })
   dateToPublish: string;
 
   @IsNotEmpty()

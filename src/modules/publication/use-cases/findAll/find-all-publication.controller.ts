@@ -18,7 +18,7 @@ export class FindAllPublicationController {
   @Get()
   async findAll(@Req() req: Request) {
     try {
-      const publications = await this.findAllPublicationService.findAll(1);
+      const publications = await this.findAllPublicationService.findAll(2);
       return publications;
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.NOT_FOUND);

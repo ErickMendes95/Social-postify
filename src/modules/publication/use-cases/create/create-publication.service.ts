@@ -6,12 +6,12 @@ import { PublicationRepository } from '../../repository/publication.repository';
 export class CreatePublicationService {
   constructor(private readonly publicationRepository: PublicationRepository) {}
 
-  async create(data: CreatePublicationDto) {
+  async create(data: CreatePublicationDto, userId: number) {
     const publication = await this.publicationRepository.findByTitle(
       data.title,
     );
     if (publication) throw new Error('Utilize um titulo diferente');
 
-    await this.publicationRepository.create(data);
+    await this.publicationRepository.create(data,userId);
   }
 }

@@ -20,12 +20,11 @@ export class CreatePublicationController {
   @Post()
   async create(
     @Body() body: CreatePublicationDto,
-    @Req() req: Request,
   ) {
-
+    const userId = 2
     try {
       const data = body;
-      return await this.createPublicationService.create(data);
+      return await this.createPublicationService.create(data,userId);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.CONFLICT);
     }
