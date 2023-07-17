@@ -8,6 +8,8 @@ import {
 } from '@nestjs/common';
 import { FindAllPublicationService } from './find-all-publication.service';
 import { Request } from 'express';
+import { AuthenticatedUserDto } from 'src/modules/auth/dto/authUserDTO';
+import { AuthGuard } from 'src/modules/auth/authGuard';
 
 @Controller('publications')
 export class FindAllPublicationController {
@@ -16,9 +18,11 @@ export class FindAllPublicationController {
   ) {}
 
   @Get()
-  async findAll(@Req() req: Request) {
+  @UseGuards(AuthGuard)
+  async findAll(@Req() req: AuthenticatedUserDto) {
+    const userId = req.id
     try {
-      const publications = await this.findAllPublicationService.findAll(2);
+      const publications = await this.findAllPublicationService.findAll(userId);
       return publications;
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.NOT_FOUND);

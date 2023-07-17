@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { PublicationModule } from './modules/publication/publication.module';
 import { UserModule } from './modules/user/user.module';
 import { PassportModule } from '@nestjs/passport';
-import { PrismaService } from './database/prisma.service';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -11,8 +11,9 @@ import { PrismaService } from './database/prisma.service';
     UserModule,
     PublicationModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
+    AuthModule,
   ],
   controllers: [],
-  providers: [PrismaService],
+  providers: [],
 })
 export class AppModule {}

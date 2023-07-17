@@ -11,6 +11,7 @@ import { UpdateUserController } from './useCases/update/update-user.controller';
 import { DeleteUserController } from './useCases/delete/delete-user.controller';
 import { UpdateUserService } from './useCases/update/update-user.service';
 import { DeleteUserService } from './useCases/delete/delete-user.service';
+import { findByEmailService } from './useCases/findByEmail/find-by-email-user.service';
 
 @Module({
   controllers: [
@@ -28,7 +29,8 @@ import { DeleteUserService } from './useCases/delete/delete-user.service';
     findByIdService,
     UpdateUserService,
     DeleteUserService,
+    findByEmailService,
   ],
-  exports: []
+  exports: [findByEmailService]
 })
 export class UserModule {}

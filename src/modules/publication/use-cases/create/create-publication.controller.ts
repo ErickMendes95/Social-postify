@@ -4,12 +4,13 @@ import {
   Body,
   HttpException,
   HttpStatus,
-  Req,
   UseGuards,
+  Request,
 } from '@nestjs/common';
 import { CreatePublicationService } from './create-publication.service';
 import { CreatePublicationDto } from '../../dto/create-publication.dto';
-import { Request } from 'express';
+import { AuthGuard } from 'src/modules/auth/authGuard';
+import { AuthenticatedUserDto } from 'src/modules/auth/dto/authUserDTO';
 
 @Controller('publication')
 export class CreatePublicationController {
@@ -18,10 +19,12 @@ export class CreatePublicationController {
   ) {}
 
   @Post()
+  @UseGuards(AuthGuard)
   async create(
     @Body() body: CreatePublicationDto,
+    @Request() req: AuthenticatedUserDto,
   ) {
-    const userId = 2
+    const userId = req.id
     try {
       const data = body;
       return await this.createPublicationService.create(data,userId);
