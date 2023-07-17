@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { CreateUserController } from './useCases/create/create-user.controller';
 import { PrismaService } from 'src/database/prisma.service';
 import { UserRepository } from './repository/user.repository';
@@ -29,6 +29,6 @@ import { DeleteUserService } from './useCases/delete/delete-user.service';
     UpdateUserService,
     DeleteUserService,
   ],
-  exports: [UserRepository]
+  exports: []
 })
 export class UserModule {}

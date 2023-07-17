@@ -12,6 +12,7 @@ import { UpdatePublicationService } from './use-cases/update/update-publication.
 import { UpdatePublicationController } from './use-cases/update/update-publication.controller';
 
 @Module({
+  imports: [],
   controllers: [
     FindAllPublicationController,
     CreatePublicationController,
@@ -26,6 +27,5 @@ import { UpdatePublicationController } from './use-cases/update/update-publicati
     UpdatePublicationService,
     DeletePublicationService,
   ],
-  imports: [],
 })
 export class PublicationModule {}
