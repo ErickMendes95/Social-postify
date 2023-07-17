@@ -1,6 +1,8 @@
 export class AuthenticatedUserDto {
-    id: number;
+  user: {
+    sub: number;
     username: string;
     ia: number;
-    ea: number; 
-  }
+    ea: number;
+  };
+}

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { UserRepository } from '../../repository/user.repository';
 
 @Injectable()
@@ -7,7 +7,7 @@ export class findByEmailService {
 
   async findByEmail(email: string) {
     const user = await this.userRepository.findByEmail(email);
-    if (!user) throw new Error('User not found');
+    if (!user) throw new NotFoundException("Email or password invalid")
 
     return user;
   }

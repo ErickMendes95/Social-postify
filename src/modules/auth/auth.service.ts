@@ -16,10 +16,10 @@ export class AuthService {
 
   async signIn(email: string, password: string) {
     const user = await this.findByEmailService.findByEmail(email);
-    if (!user) throw new NotFoundException();
+    if (!user) throw new NotFoundException("Email or password invalid");
 
     const passMatch = compareSync(password, user.password);
-    if (!passMatch) throw new UnauthorizedException();
+    if (!passMatch) throw new NotFoundException("Email or password invalid");
 
     const payload = { sub: user.id, username: user.name };
     return {

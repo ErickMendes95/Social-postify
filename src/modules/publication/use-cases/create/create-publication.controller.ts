@@ -24,7 +24,7 @@ export class CreatePublicationController {
     @Body() body: CreatePublicationDto,
     @Request() req: AuthenticatedUserDto,
   ) {
-    const userId = req.id
+    const userId = req.user.sub
     try {
       const data = body;
       return await this.createPublicationService.create(data,userId);

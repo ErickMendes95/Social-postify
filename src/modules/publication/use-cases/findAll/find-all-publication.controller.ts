@@ -7,7 +7,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { FindAllPublicationService } from './find-all-publication.service';
-import { Request } from 'express';
 import { AuthenticatedUserDto } from 'src/modules/auth/dto/authUserDTO';
 import { AuthGuard } from 'src/modules/auth/authGuard';
 
@@ -20,7 +19,7 @@ export class FindAllPublicationController {
   @Get()
   @UseGuards(AuthGuard)
   async findAll(@Req() req: AuthenticatedUserDto) {
-    const userId = req.id
+    const userId = req.user.sub
     try {
       const publications = await this.findAllPublicationService.findAll(userId);
       return publications;
