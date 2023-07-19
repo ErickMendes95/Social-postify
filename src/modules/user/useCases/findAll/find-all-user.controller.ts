@@ -3,17 +3,17 @@ import {
   HttpStatus,
   HttpException,
   Get,
-  // Req,
-  // UseGuards,
+  UseGuards,
 } from '@nestjs/common';
 import { findAllUserService } from './find-all-user.service';
 import { User } from '@prisma/client';
-import { Request } from 'express';
+import { AuthGuard } from 'src/modules/auth/authGuard';
 
 @Controller('user')
 export class FindAllController {
   constructor(private readonly findAllUserService: findAllUserService) {}
 
+  @UseGuards(AuthGuard)
   @Get()
   async findAll(): Promise<Omit<User, 'password'>[]> {
     try {

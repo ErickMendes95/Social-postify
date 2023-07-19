@@ -4,8 +4,13 @@ import {
   HttpStatus,
   Delete,
   Param,
+  UnauthorizedException,
+  Request,
+  UseGuards,
 } from '@nestjs/common';
 import { DeletePublicationService } from './delete-publication.service';
+import { AuthenticatedUserDto } from 'src/modules/auth/dto/authUserDTO';
+import { AuthGuard } from 'src/modules/auth/authGuard';
 
 @Controller('publication')
 export class DeletePublicationController {
@@ -13,13 +18,14 @@ export class DeletePublicationController {
     private readonly deletePublicationService: DeletePublicationService,
   ) {}
 
+  @UseGuards(AuthGuard)
   @Delete(':id')
-  // @UseGuards(AuthGuard('jwt'))
   async delete(
-    // @Req()  req: Request
+    @Request()  req: AuthenticatedUserDto,
     @Param('id') id: number,
   ) {
-    // const userId = request.user.id;
+    const userId = req.user.sub;
+    if(userId !== id) throw new UnauthorizedException()
     try {
       return await this.deletePublicationService.delete(id);
     } catch (error) {

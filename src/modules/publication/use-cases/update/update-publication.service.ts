@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PublicationRepository } from '../../repository/publication.repository';
 import { UpdatePublicationDto } from '../../dto/update-publication.dto';
 
@@ -6,10 +6,10 @@ import { UpdatePublicationDto } from '../../dto/update-publication.dto';
 export class UpdatePublicationService {
   constructor(private readonly publicationRepository: PublicationRepository) {}
 
-  async update(id: number, body: UpdatePublicationDto) {
+  async update(id: number, data: UpdatePublicationDto) {
     const publication = await this.publicationRepository.findById(id);
-    if (!publication) throw new Error('Essa publicação não existe.');
+    if (!publication) throw new NotFoundException('Essa publicação não existe.');
 
-    await this.publicationRepository.updateById(id,body);
+    await this.publicationRepository.updateById(id,data);
   }
 }
